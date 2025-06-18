@@ -1,0 +1,124 @@
+
+
+# ==========================================================
+# 🎧 Public Open-Source VC Player Music Bot (Cookies Based)
+# 🛠️ Maintained by Team GrayBots | Lead Developer: @Nikchil
+# 🔓 Licensed for Public Use — All Rights Reserved © Team GrayBots
+#
+# This file is part of a publicly available and open-source Telegram music bot
+# developed by Team GrayBots. It offers high-quality streaming in Telegram voice
+# chats using YouTube as a source, supported by session-based assistant accounts and
+# YouTube cookie integration for improved access and performance.
+#
+# 💡 This source code is released for educational and community purposes. You're free
+# to study, modify, and deploy it under fair and respectful usage. However, any misuse,
+# removal of credits, or false ownership claims will be considered a violation of our
+# community standards and may lead to denial of support or blacklisting.
+#
+# 🔗 Looking for powerful performance with stable APIs? Get access to the official
+# Get Your API from @Nikchil
+#
+# ❤️ Openly built for the community, but proudly protected by the passion of its creators.
+# ==========================================================
+
+
+
+
+import re
+
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+from youtubesearchpython.__future__ import VideosSearch
+
+import config
+
+
+class SpotifyAPI:
+    def __init__(self):
+        self.regex = r"^(https:\/\/open.spotify.com\/)(.*)$"
+        self.client_id = config.SPOTIFY_CLIENT_ID
+        self.client_secret = config.SPOTIFY_CLIENT_SECRET
+        if config.SPOTIFY_CLIENT_ID and config.SPOTIFY_CLIENT_SECRET:
+            self.client_credentials_manager = SpotifyClientCredentials(
+                self.client_id, self.client_secret
+            )
+            self.spotify = spotipy.Spotify(
+                client_credentials_manager=self.client_credentials_manager
+            )
+        else:
+            self.spotify = None
+
+    async def valid(self, link: str):
+        if re.search(self.regex, link):
+            return True
+        else:
+            return False
+
+    async def track(self, link: str):
+        track = self.spotify.track(link)
+        info = track["name"]
+        for artist in track["artists"]:
+            fetched = f' {artist["name"]}'
+            if "Various Artists" not in fetched:
+                info += fetched
+        results = VideosSearch(info, limit=1)
+        for result in (await results.next())["result"]:
+            ytlink = result["link"]
+            title = result["title"]
+            vidid = result["id"]
+            duration_min = result["duration"]
+            thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+        track_details = {
+            "title": title,
+            "link": ytlink,
+            "vidid": vidid,
+            "duration_min": duration_min,
+            "thumb": thumbnail,
+        }
+        return track_details, vidid
+
+    async def playlist(self, url):
+        playlist = self.spotify.playlist(url)
+        playlist_id = playlist["id"]
+        results = []
+        for item in playlist["tracks"]["items"]:
+            music_track = item["track"]
+            info = music_track["name"]
+            for artist in music_track["artists"]:
+                fetched = f' {artist["name"]}'
+                if "Various Artists" not in fetched:
+                    info += fetched
+            results.append(info)
+        return results, playlist_id
+
+    async def album(self, url):
+        album = self.spotify.album(url)
+        album_id = album["id"]
+        results = []
+        for item in album["tracks"]["items"]:
+            info = item["name"]
+            for artist in item["artists"]:
+                fetched = f' {artist["name"]}'
+                if "Various Artists" not in fetched:
+                    info += fetched
+            results.append(info)
+
+        return (
+            results,
+            album_id,
+        )
+
+    async def artist(self, url):
+        artistinfo = self.spotify.artist(url)
+        artist_id = artistinfo["id"]
+        results = []
+        artisttoptracks = self.spotify.artist_top_tracks(url)
+        for item in artisttoptracks["tracks"]:
+            info = item["name"]
+            for artist in item["artists"]:
+                fetched = f' {artist["name"]}'
+                if "Various Artists" not in fetched:
+                    info += fetched
+            results.append(info)
+
+        return results, artist_id
