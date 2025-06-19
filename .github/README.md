@@ -198,7 +198,7 @@ This project is licensed under the MIT License. For more details, see the [LICEN
 
 ## Credits  
 
-- [Yukki Music](https://github.com/TeamYukki/YukkiMusicBot) & [TgMusicBot](https://github.com/AshokShau/TgMusicBot) & [AviaxMusic](https://github.com/CyberPixelPro/AviaxMusic) & [AnonXMusic](https://github.com/AnonymousX1025/AnonXMusic) For their Source Codes.
+- [DeadlineTech Music](https://github.com/deadlineTech/music) & [Yukki Music](https://github.com/TeamYukki/YukkiMusicBot) & [TgMusicBot](https://github.com/AshokShau/TgMusicBot) & [AviaxMusic](https://github.com/CyberPixelPro/AviaxMusic) & [AnonXMusic](https://github.com/AnonymousX1025/AnonXMusic) For their Source Codes.
 
 ---
 
