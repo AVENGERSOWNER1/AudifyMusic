@@ -9,7 +9,7 @@ Audify Music 🎧
  </p>
 
 <p align="center">
-<a href="https://github.com/GrayBots/AudifyMusic/stargazers"><img src="https://img.shields.io/github/stars/GrayBots/AudifyMusic?color=black&logo=github&logoColor=black&style=for-the-badge" alt="Stars" /></a>
+<a href="https://github.com/AVENGERSOWNER1/AudifyMusic"><img src="https://img.shields.io/github/stars/GrayBots/AudifyMusic?color=black&logo=github&logoColor=black&style=for-the-badge" alt="Stars" /></a>
 <a href="https://github.com/GrayBots/AudifyMusic/network/members"> <img src="https://img.shields.io/github/forks/GrayBots/AudifyMusic?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
 <a href="https://github.com/GrayBots/AudifyMusic/blob/master/LICENSE"> <img src="https://img.shields.io/badge/License-MIT-blueviolet?style=for-the-badge" alt="License" /> </a>
 <a href="https://www.python.org/"> <img src="https://img.shields.io/badge/Written%20in-Python-orange?style=for-the-badge&logo=python" alt="Python" /> </a>
